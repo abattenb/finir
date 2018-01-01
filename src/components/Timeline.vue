@@ -1,6 +1,6 @@
 <template>
   <div class="timeline">
-    <div 
+    <!-- <div 
       :style="styles(timeline[0])"
       class="day today">
       <div>
@@ -9,20 +9,24 @@
         </div>
         <div class="list">
           <div 
-            v-for="challenge in list"
-            :key="challenge.thing"
-            class="challenge">
+            v-for="day in list"
+            :key="day.name"
+            class="day">
             <i class="far fa-square"></i>
             &nbsp;
-            {{ challenge.name }}
+            {{ day.name }}
           </div>
         </div>
         <button class="fin">
           FIN
         </button>
       </div>
-    </div>
-    <div 
+    </div> -->
+    <day 
+      v-for="day in timeline"
+      :key="day.date"
+      :thisDay="day" />
+    <!-- <div 
       v-for="day in notToday"
       :key="day.date"
       :style="styles(day)"
@@ -36,13 +40,14 @@
           <i class="far fa-times" v-else></i>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
-import hexToRGB from '@/common/utils';
 /* eslint-disable no-console */
+import Color from 'color';
+import day from './Day';
 
 export default {
   name: 'timeline',
@@ -57,27 +62,27 @@ export default {
         {
           date: '2017-12-31',
           complete: true,
-          color: '#ef5350',
+          color: Color('#ef5350'),
         },
         {
           date: '2017-12-30',
           complete: true,
-          color: '#26A69A',
+          color: Color('#26A69A'),
         },
         {
           date: '2017-12-29',
           complete: false,
-          color: '#7E57C2',
+          color: Color('#7E57C2'),
         },
         {
           date: '2017-12-28',
           complete: false,
-          color: '#2196F3',
+          color: Color('#2196F3'),
         },
         {
           date: '2017-12-27',
           complete: true,
-          color: '#FFA726',
+          color: Color('#FFA726'),
         },
       ],
     };
@@ -85,16 +90,19 @@ export default {
   created() {
   },
   methods: {
-    styles(day) {
-      const opacity = (day.complete ? 1.0 : 0.1);
-      const color = hexToRGB(day.color);
-      return `background-color: rgba(${color},${opacity})`;
+    styles(thisDay) {
+      const color = thisDay.color;
+      console.log(color);
+      return `background-color: ${color.rgb().fade(0.0).string()}`;
     },
   },
   computed: {
     notToday() {
       return this.timeline.slice(1, this.timeline.length);
     },
+  },
+  components: {
+    day,
   },
 };
 </script>
@@ -108,55 +116,6 @@ export default {
   overflow-y: hidden;
 }
 
-.day {
-  flex: 0 0 80vw;
-  display: flex;
-  position: relative;
-  height: 100%;
-  text-align: center;
-  font-size: 3rem;
-  font-weight: 600;
-  color: white;
-  box-shadow: inset 0 0 10rem rgba(0, 0, 0, .2);
-  text-shadow: 0 -.05rem 0rem #777;
-  border: .05rem solid black;
-  box-sizing: border-box;
-
-  &:before {
-    content: '';
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    background: linear-gradient(-5deg, rgba(0,0,0,0.25), rgba(255,255,255,0.3));
-    mix-blend-mode: overlay;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  & > div {
-    width: 100%;
-    margin: auto 0;
-  }
-
-  & .icon {
-    font-size: 5rem;
-  }
-
-  .list {
-    font-size: 2rem;
-    text-align: left;
-    margin: 1rem 0 1.75rem 0;
-
-    & .challenge {
-      border-top: .1rem solid rgba(0, 0, 0, .2);
-      border-bottom: .1rem solid rgba(0, 0, 0, .2);
-      padding: .5rem 2rem;
-      margin-bottom: -.1rem;
-      background: linear-gradient(-5deg, rgba(0,0,0,0.05), rgba(0,0,0,0));
-      cursor: pointer;
-    }
-  }
-}
 
 .fin {
   display: block;
