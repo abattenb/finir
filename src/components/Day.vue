@@ -1,17 +1,16 @@
 <template>
   <div class="day" :style="bg()">
-    <div>
-      {{thisDay.date}}
-    </div>
+    <!-- <div>{{formatDate}}</div> -->
     <div class="icon">
-      <i class="far fa-check-circle" v-if="thisDay.complete"></i>
-      <i class="far fa-times" v-else></i>
+      <i class="fal" :class="thisDay.reward" v-if="thisDay.complete"></i>
+      <span v-else>&middot;</span>
     </div>
   </div>
 </template>
 <script>
 /* eslint-disable */
 import Color from 'color';
+import dateFns from 'date-fns';
 
 export default {
   name: 'day',
@@ -23,16 +22,21 @@ export default {
     }
   },
   created() {
-    console.log(this.thisDay);
+  },
+  computed: {
+    formatDate() {
+      return dateFns.format(this.thisDay.day, 'MMMM Do');
+    },
   },
   methods: {
     bg() {
+      // TODO: Generate all colors into classes
       let style= '';
+      const color = this.thisDay.color;
+      const high = color.rotate(10).lighten(0.1).string();
+      const low = color.rotate(-15).darken(0.1).string();
+      const dark = color.rotate(-10).darken(0.3).string();
       if (this.thisDay.complete) {
-        const color = this.thisDay.color;
-        const high = color.rotate(10).lighten(0.1).string();
-        const low = color.rotate(-15).darken(0.1).string();
-        const dark = color.rotate(-10).darken(0.3).string();
         const gradient = `linear-gradient(-185deg, ${high}, ${low})`;
         style= `
           background: ${gradient};
@@ -42,10 +46,16 @@ export default {
           border-right: .1rem solid ${dark};`;
       } else {
         style= `
+          color: #CCC;
           background: #E9E9E9;
           border-left: .05rem solid #FFF;
-          border-right: .05rem solid #EEE;`;
+          border-right: .05rem solid #DDD;`;
       }
+      console.log('color');
+      console.log(this.thisDay.color.hsl().string());
+      console.log(high);
+      console.log(low);
+      console.log(dark);
       return style;
     },
   },
@@ -64,12 +74,11 @@ export default {
   font-size: 3rem;
   font-weight: 600;
   color: white;
-  // border: .05rem solid black;
   box-sizing: border-box;
 
 
   & .icon {
-    font-size: 5rem;
+    font-size: 7rem;
   }
 
   &.today {

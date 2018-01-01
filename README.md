@@ -9,6 +9,7 @@ fenir mean 'to finish'. This is a personal completion app, customized to my dail
 * Color as a motivator
 * [IKEA Effect](https://en.wikipedia.org/wiki/IKEA_effect) + 'Yet Another Todo'
 * Forgiveness-as-a-Service
+* Novelity as reward
 
 ## Concepts
 
@@ -21,9 +22,13 @@ fenir mean 'to finish'. This is a personal completion app, customized to my dail
 
 It's amazing how different an experience can be when you aren't mining data..
 
-A todo list is the developer equivalent of am industrial designer's chair..
+A todo list is the developer equivalent of an industrial designer's chair..
 
 Naming concepts frames everything. 'Challenges' vs 'Todos'..
+
+The icons may be pushing too hard into 'Fear of Missing Out'..
+
+When was the last time an app or service _forgave_ you?..
 
 ## Build Setup
 
