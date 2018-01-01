@@ -1,6 +1,8 @@
 // finir
 @import url('https://fonts.googleapis.com/css?family=Assistant:200,300,400,600,700,800');
 
+@import '~@/assets/webfonts-with-css/css/fontawesome-all.css';
+
 html {
   background: #fafafa;
   font-family: 'Assistant', sans-serif;
@@ -8,4 +10,10 @@ html {
 
 body {
   margin: 0;
+}
+
+button,
+.button,
+a {
+  cursor: pointer;
 }
