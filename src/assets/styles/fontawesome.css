@@ -1,10 +1,8 @@
-@import './fontawesome.min.css';
-
 @font-face {
   font-family: 'Font Awesome 5 Solid';
   font-style: normal;
   font-weight: 900;
-  src: url("/static/fa-solid-900.woff") format("woff");
+  src: url("~@/assets/fa-solid-900.woff2") format("woff2");
 }
 .fas {
   font-family: 'Font Awesome 5 Solid';
@@ -14,7 +12,7 @@
   font-family: 'Font Awesome 5 Regular';
   font-style: normal;
   font-weight: 400;
-  src: url("/static/fa-regular-400.woff") format("woff");
+  src: url("~@/assets/fa-regular-400.woff2") format("woff2");
 }
 .far {
   font-family: 'Font Awesome 5 Regular';
@@ -25,9 +23,11 @@
   font-family: 'Font Awesome 5 Light';
   font-style: normal;
   font-weight: 300;
-  src: url("/static/fa-light-300.woff") format("woff");
+  src: url("~@/assets/fa-light-300.woff2") format("woff2");
 }
 .fal {
   font-family: 'Font Awesome 5 Light';
   font-weight: 300;
 }
+
+@import './fontawesome.min.css';
