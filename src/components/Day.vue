@@ -1,8 +1,8 @@
 <template>
-  <div class="day" :style="bg()">
+  <div class="day" :class="theme">
     <!-- <div>{{formatDate}}</div> -->
     <div class="icon">
-      <i class="fal" :class="thisDay.reward" v-if="thisDay.complete"></i>
+      <i class="fal" v-if="thisDay.reward" :class="thisDay.reward" />
       <span v-else>&middot;</span>
     </div>
   </div>
@@ -22,42 +22,17 @@ export default {
     }
   },
   created() {
+    console.log(this.thisDay.theme);
   },
   computed: {
     formatDate() {
       return dateFns.format(this.thisDay.day, 'MMMM Do');
     },
+    theme() {
+      return (this.thisDay.reward !== '' ? this.thisDay.theme : '');
+    }
   },
   methods: {
-    bg() {
-      // TODO: Generate all colors into classes
-      let style= '';
-      const color = this.thisDay.color;
-      const high = color.rotate(10).lighten(0.1).string();
-      const low = color.rotate(-15).darken(0.1).string();
-      const dark = color.rotate(-10).darken(0.3).string();
-      if (this.thisDay.complete) {
-        const gradient = `linear-gradient(-185deg, ${high}, ${low})`;
-        style= `
-          background: ${gradient};
-          box-shadow: inset 0 0 10rem ${dark};
-          text-shadow: 0 -.075rem 0rem ${dark};
-          border-left: .1rem solid ${dark};
-          border-right: .1rem solid ${dark};`;
-      } else {
-        style= `
-          color: #CCC;
-          background: #E9E9E9;
-          border-left: .05rem solid #FFF;
-          border-right: .05rem solid #DDD;`;
-      }
-      console.log('color');
-      console.log(this.thisDay.color.hsl().string());
-      console.log(high);
-      console.log(low);
-      console.log(dark);
-      return style;
-    },
   },
 };
 </script>
@@ -75,6 +50,19 @@ export default {
   font-weight: 600;
   color: white;
   box-sizing: border-box;
+
+  --theme-text: #DDD;
+  --theme-primary: #FAFAFA;
+  --theme-high: #FAFAFA;
+  --theme-low: #FAFAFA;
+  --theme-dark: #FAFAFA;
+
+  color: var(--theme-text);
+  box-shadow: inset 0 0 10rem var(--theme-dark);
+  text-shadow: 0 -.075rem 0rem var(--theme-dark);
+  border-left: .1rem solid var(--theme-high);
+  border-right: .1rem solid var(--theme-dark);
+  background: linear-gradient(-185deg, var(--theme-high), var(--theme-low));
 
 
   & .icon {
@@ -101,5 +89,6 @@ export default {
     }
   }
 }
+
 </style>
 

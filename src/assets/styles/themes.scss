@@ -1,0 +1,58 @@
+.day {
+  &.starburst {
+    --theme-text: hsla(1, 83%, 100%, 1);
+    --theme-high: hsla(11, 83%, 70%, 1);
+    --theme-primary: hsla(1, 83%, 62%, 1);
+    --theme-low: hsla(340, 83%, 56%, 1);
+    --theme-dark: hsla(350, 83%, 44%, 1);
+  }
+  &.genepersimmons {
+    --theme-text: hsla(1, 83%, 100%, 1);
+    --theme-high: hsla(34, 100%, 70%, 1);
+    --theme-primary: hsla(24, 100%, 63%, 1);
+    --theme-low: hsla(4, 100%, 56%, 1);
+    --theme-dark: hsla(14, 100%, 44%, 1);
+  }
+  &.gloriousincandescence {
+    --theme-text: hsla(1, 83%, 100%, 1);
+    --theme-high: hsla(70, 100%, 75%, 1);
+    --theme-primary: hsla(60, 90%, 55%, 1);
+    --theme-low: hsla(35, 100%, 50%, 1);
+    --theme-dark: hsla(50, 100%, 40%, 1);
+  }
+  &.limelife {
+    --theme-text: hsla(1, 83%, 100%, 1);
+    --theme-high: hsla(110, 100%, 85%, 1);
+    --theme-primary: hsla(90, 70%, 65%, 1);
+    --theme-low: hsla(70, 100%, 50%, 1);
+    --theme-dark: hsla(55, 100%, 40%, 1);
+  }
+  &.seadrink {
+    --theme-text: hsla(1, 83%, 100%, 1);
+    --theme-high: hsla(180, 100%, 70%, 1);
+    --theme-primary: hsla(160, 90%, 45%, 1);
+    --theme-low: hsla(140, 100%, 56%, 1);
+    --theme-dark: hsla(150, 100%, 30%, 1);
+  }
+  &.barbiegirl {
+    --theme-text: hsla(1, 83%, 100%, 1);
+    --theme-high: hsla(210, 100%, 70%, 1);
+    --theme-primary: hsla(200, 90%, 65%, 1);
+    --theme-low: hsla(170, 90%, 45%, 1);
+    --theme-dark: hsla(180, 100%, 20%, 1);
+  }
+  &.spiltblues {
+    --theme-text: hsla(1, 83%, 100%, 1);
+    --theme-high: hsla(260, 100%, 80%, 1);
+    --theme-primary: hsla(240, 90%, 65%, 1);
+    --theme-low: hsla(210, 90%, 50%, 1);
+    --theme-dark: hsla(223, 90%, 40%, 1);
+  }
+  &.megaviolet {
+    --theme-text: hsla(1, 83%, 100%, 1);
+    --theme-high: hsla(280, 100%, 65%, 1);
+    --theme-primary: hsla(270, 100%, 60%, 1);
+    --theme-low: hsla(250, 100%, 56%, 1);
+    --theme-dark: hsla(260, 100%, 44%, 1);
+  }
+}

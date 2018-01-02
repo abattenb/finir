@@ -1,8 +1,6 @@
 <template>
   <div class="timeline">
-    <div 
-      :style="styles(timeline[0])"
-      class="day today">
+    <!-- <div class="day today">
       <div>
         <div>
           {{ formatDate(timeline[0].day) }}
@@ -21,7 +19,7 @@
           FIN
         </button>
       </div>
-    </div>
+    </div> -->
     <day v-for="day in notToday" :key="day.day" :thisDay="day" />
   </div>
 </template>
@@ -43,6 +41,16 @@ export default {
         { name: 'Wake up', done: false },
         { name: 'Eat', done: false },
         { name: 'Meditate', done: false },
+      ],
+      themes: [
+        'starburst',
+        'genepersimmons',
+        'gloriousincandescence',
+        'limelife',
+        'seadrink',
+        'barbiegirl',
+        'spiltblues',
+        'megaviolet',
       ],
       rewards: [
         'fa-anchor',
@@ -111,48 +119,53 @@ export default {
       timeline: [
         {
           day: '2018-01-01T08:00:00.000Z',
-          complete: false,
-          color: Color('#2196F3'),
+          theme: 'genepersimmons',
           reward: '',
         },
         {
           day: '2017-12-31T08:00:00.000Z',
-          complete: true,
-          color: Color('#ef5350'),
+          theme: 'megaviolet',
           reward: 'fa-leaf',
         },
         {
           day: '2017-12-30T08:00:00.000Z',
-          complete: true,
-          color: Color('#26A69A'),
+          theme: 'genepersimmons',
           reward: 'fa-gem',
         },
         {
           day: '2017-12-29T08:00:00.000Z',
-          complete: false,
-          color: Color('#7E57C2'),
+          theme: '',
           reward: '',
         },
         {
           day: '2017-12-28T08:00:00.000Z',
-          complete: true,
-          color: Color('#2196F3'),
+          theme: 'starburst',
           reward: 'fa-coffee',
         },
         {
           day: '2017-12-27T08:00:00.000Z',
-          complete: true,
-          color: Color('#FFA726'),
+          theme: 'limelife',
+          reward: 'fa-bomb',
+        },
+        {
+          day: '2017-12-26T08:00:00.000Z',
+          theme: 'seadrink',
+          reward: 'fa-bomb',
+        },
+        {
+          day: '2017-12-25T08:00:00.000Z',
+          theme: 'barbiegirl',
+          reward: 'fa-bomb',
+        },
+        {
+          day: '2017-12-24T08:00:00.000Z',
+          theme: 'spiltblues',
           reward: 'fa-bomb',
         },
       ],
     };
   },
   methods: {
-    styles(thisDay) {
-      const color = thisDay.color;
-      return `background-color: ${color.rgb().fade(0.0).string()}`;
-    },
     formatDate(thisDay) {
       return dateFns.format(thisDay, 'MMMM Do');
     },
