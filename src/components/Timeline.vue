@@ -42,7 +42,7 @@ export default {
       list: [
         { name: 'Wake up', done: false },
         { name: 'Eat', done: true },
-        { name: 'Meditate', done: false },
+        { name: 'Meditate', done: true },
       ],
       themes: [
         'starburst',

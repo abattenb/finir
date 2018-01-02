@@ -18,7 +18,7 @@
           </div>
         </div>
       </div>
-      <button class="fin">
+      <button class="fin" :class="[canFinish ? 'enabled' : 'disabled']">
         FIN
       </button>
     </div>
@@ -43,9 +43,12 @@ export default {
   },
   created() {
     this.currentList = JSON.parse(JSON.stringify(this.list));
-    console.log(this.currentList);
+    // console.log(this.currentList);
   },
   computed: {
+    canFinish() {
+      return this.currentList.every(x => x.done === true);
+    },
   },
   methods: {
     toggleDone(index, thing) {
@@ -54,7 +57,7 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 
 .today {
   // box-shadow: -.25rem 0 1.5rem 0 #444;
@@ -64,7 +67,7 @@ export default {
     font-size: 2rem;
     font-weight: 400;
     text-align: left;
-    margin: 1rem 0 1.75rem 0;
+    margin: 2rem 0 2.75rem 0;
 
     & .thing {
       position: relative;
@@ -83,10 +86,10 @@ export default {
         content: '';
         display: block;
         position: absolute;
-        height: .15rem;
+        height: .125rem;
         width: calc(0%);
         left: 5rem; 
-        top: 1.6rem;
+        top: 1.65rem;
         background: var(--theme-text);
         transition: 1.2s all ease-in;
       }
@@ -109,44 +112,63 @@ export default {
       position: relative;
       & > i {
         position: absolute;
-        top: .2rem;
+        top: .175rem;
         left: 0;
       }
       .show {
         opacity: 1;
-        transition: .2s opacity ease-out;
+        transition: .1s opacity ease-out;
       }
       .hide {
         opacity: 0;
-        transition: 1.2s opacity ease-in;
+        transition: .8s opacity ease-in;
       }
+    }
+  }
+
+  .fin {
+    display: block;
+    width: calc(100% - 4rem);
+    font-size: 2.5rem;
+    background: none;
+    color: white;
+    font-weight: 700;
+    padding: .5rem;
+    margin: 0 2rem;
+    border: .1rem solid var(--theme-low);
+    border-radius: .2rem;
+
+    &:hover,
+    &:focus,
+    &:active {
+      transition: .2s all;
+    }
+
+    &.enabled {
+      position: relative;
+      opacity: 1;
+      border: .1rem solid var(--theme-text);
+      transform: translateY(-.1rem);
+      box-shadow: 0 .25rem .5rem var(--theme-dark), 0 -.25rem .5rem var(--theme-high);
+      transition: .15s all ease-in;
+    }
+
+    &.enabled:active {
+      position: relative;
+      opacity: 1;
+      border: .1rem solid var(--theme-text);
+      transform: translateY(.1rem);
+      box-shadow: 0 -.15rem .5rem var(--theme-dark), 0 .15rem .5rem var(--theme-high);
+      transition: .1s all cubic-bezier(.15,.85,.15,.85);
+    }
+
+    &.disabled {
+      opacity: 0.25;
+      border: .1rem solid var(--theme-text);
+      box-shadow: 0 0 0 var(--theme-dark), 0 0 0 var(--theme-high);
+      transition: .8s all ease-out;
     }
   }
 }
 
-.fin {
-  display: block;
-  width: calc(100% - 4rem);
-  font-size: 2.5rem;
-  background: var(--theme-high);
-  background: none;
-  color: white;
-  font-weight: 700;
-  padding: .5rem;
-  margin: 0 2rem;
-  border: .05rem solid var(--theme-dark);
-  border-radius: .2rem;
-  box-shadow: 0 .1rem 0rem var(--theme-dark);
-  transition: .2s all;
-
-  &:hover,
-  &:focus,
-  &:active {
-    background: var(--theme-low);
-    transition: .2s all;
-  }
-}
-
-
 </style>
-
