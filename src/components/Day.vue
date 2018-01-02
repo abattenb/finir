@@ -22,14 +22,14 @@ export default {
     }
   },
   created() {
-    console.log(this.thisDay.theme);
   },
   computed: {
     formatDate() {
       return dateFns.format(this.thisDay.day, 'MMMM Do');
     },
     theme() {
-      return (this.thisDay.reward !== '' ? this.thisDay.theme : '');
+      // If 'reward' exists or it's today, apply theme 
+      return (this.thisDay.reward !== '' || dateFns.isToday(this.thisDay.day) ? this.thisDay.theme : '');
     }
   },
   methods: {
@@ -46,7 +46,7 @@ export default {
   position: relative;
   height: 100%;
   text-align: center;
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 600;
   color: white;
   box-sizing: border-box;
@@ -67,26 +67,6 @@ export default {
 
   & .icon {
     font-size: 7rem;
-  }
-
-  &.today {
-    box-shadow: -.25rem 0 1.5rem 0 #444;
-    z-index: 1;
-
-    .list {
-      font-size: 2rem;
-      text-align: left;
-      margin: 1rem 0 1.75rem 0;
-
-      & .day {
-        border-top: .1rem solid rgba(0, 0, 0, .2);
-        border-bottom: .1rem solid rgba(0, 0, 0, .2);
-        padding: .5rem 2rem;
-        margin-bottom: -.1rem;
-        background: linear-gradient(-5deg, rgba(0,0,0,0.05), rgba(0,0,0,0));
-        cursor: pointer;
-      }
-    }
   }
 }
 

@@ -20,6 +20,7 @@
         </button>
       </div>
     </div> -->
+    <today :thisDay="timeline[0]" :list="list"/>
     <day v-for="day in notToday" :key="day.day" :thisDay="day" />
   </div>
 </template>
@@ -32,6 +33,7 @@
 import Color from 'color';
 import dateFns from 'date-fns';
 import day from './Day';
+import today from './Today';
 
 export default {
   name: 'timeline',
@@ -39,7 +41,7 @@ export default {
     return {
       list: [
         { name: 'Wake up', done: false },
-        { name: 'Eat', done: false },
+        { name: 'Eat', done: true },
         { name: 'Meditate', done: false },
       ],
       themes: [
@@ -171,12 +173,6 @@ export default {
     },
   },
   created() {
-    let now = new Date(2017, 11, 29);
-    // console.log(now);
-    while (!dateFns.isToday(now)) {
-      now = dateFns.addDays(now, 1);
-      // console.log(now);
-    }
   },
   computed: {
     notToday() {
@@ -185,6 +181,7 @@ export default {
   },
   components: {
     day,
+    today,
   },
 };
 </script>
@@ -196,28 +193,6 @@ export default {
   height: 100vh;
   overflow-x: scroll;
   overflow-y: hidden;
-}
-
-
-.fin {
-  display: block;
-  width: calc(100% - 4rem);
-  font-size: 2.5rem;
-  background: none;
-  color: white;
-  font-weight: 700;
-  padding: .5rem;
-  margin: 0 2rem;
-  box-shadow: 0 .05rem 0rem #777;
-  border: .2rem solid white;
-  transition: .2s all;
-
-  &:hover,
-  &:focus,
-  &:active {
-    background: rgba(0, 0, 0, .2);
-    transition: .2s all;
-  }
 }
 
 </style>
