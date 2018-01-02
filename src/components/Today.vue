@@ -141,23 +141,23 @@ export default {
     &:hover,
     &:focus,
     &:active {
-      transition: .2s all;
+      transition: .1s all;
     }
 
     &.enabled {
       position: relative;
       opacity: 1;
       border: .1rem solid var(--theme-text);
-      transform: translateY(-.1rem);
+      transform: translateY(-.05rem);
       box-shadow: 0 .25rem .5rem var(--theme-dark), 0 -.25rem .5rem var(--theme-high);
-      transition: .15s all ease-in;
+      transition: .1s all ease-in;
     }
 
     &.enabled:active {
       position: relative;
       opacity: 1;
       border: .1rem solid var(--theme-text);
-      transform: translateY(.1rem);
+      transform: translateY(.05rem);
       box-shadow: 0 -.15rem .5rem var(--theme-dark), 0 .15rem .5rem var(--theme-high);
       transition: .1s all cubic-bezier(.15,.85,.15,.85);
     }
