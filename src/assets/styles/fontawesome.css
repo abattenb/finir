@@ -4,7 +4,7 @@
   font-family: 'Font Awesome 5 Solid';
   font-style: normal;
   font-weight: 900;
-  src: url("/static/fa-solid-900.woff") format("woff");
+  src: url("~/static/fa-solid-900.woff") format("woff");
 }
 .fas {
   font-family: 'Font Awesome 5 Solid';
@@ -14,7 +14,7 @@
   font-family: 'Font Awesome 5 Regular';
   font-style: normal;
   font-weight: 400;
-  src: url("/static/fa-regular-400.woff") format("woff");
+  src: url("~/static/fa-regular-400.woff") format("woff");
 }
 .far {
   font-family: 'Font Awesome 5 Regular';
@@ -25,7 +25,7 @@
   font-family: 'Font Awesome 5 Light';
   font-style: normal;
   font-weight: 300;
-  src: url("/static/fa-light-300.woff") format("woff");
+  src: url("~/static/fa-light-300.woff") format("woff");
 }
 .fal {
   font-family: 'Font Awesome 5 Light';
