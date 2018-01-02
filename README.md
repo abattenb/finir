@@ -47,3 +47,12 @@ npm run build --report
 ```
 
 For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+# Note!!
+
+`config/index.js` has been changed in three important ways to build for 
+Github pages instead of a standard static host:
+
+* `assetsPublicPath: '/'` -> `assetsPublicPath: './'`
+* `index: path.resolve(__dirname, '../dist/index.html'),` -> `    index: path.resolve(__dirname, '../docs/index.html')`
+* `    assetsRoot: path.resolve(__dirname, '../dist'),` -> `    assetsRoot: path.resolve(__dirname, '../docs'),`
