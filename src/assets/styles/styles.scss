@@ -1,13 +1,13 @@
 // finir
 @import url('https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,600,800');
 
-@import '~@/assets/webfonts-with-css/css/fontawesome-all.css';
 @import './themes.scss';
+@import './fontawesome.css';
+
 
 html {
   background: #fafafa;
-font-family: 'Fira Sans', sans-serif;
-
+  font-family: 'Fira Sans', sans-serif;
 }
 
 body {

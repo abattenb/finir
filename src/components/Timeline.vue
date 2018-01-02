@@ -152,17 +152,17 @@ export default {
         {
           day: '2017-12-26T08:00:00.000Z',
           theme: 'seadrink',
-          reward: 'fa-bomb',
+          reward: 'fa-book',
         },
         {
           day: '2017-12-25T08:00:00.000Z',
           theme: 'barbiegirl',
-          reward: 'fa-bomb',
+          reward: 'fa-utensils-alt',
         },
         {
           day: '2017-12-24T08:00:00.000Z',
           theme: 'spiltblues',
-          reward: 'fa-bomb',
+          reward: 'fa-trophy',
         },
       ],
     };
