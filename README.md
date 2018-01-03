@@ -7,16 +7,16 @@ fenir mean 'to finish'. This is a personal completion app, customized to my dail
 ## Goals
 
 * Color as a motivator
-* [IKEA Effect](https://en.wikipedia.org/wiki/IKEA_effect) as 'Yet Another Todo'
-* Forgiveness-as-a-Service
-* Small steps + small rewards = Big change
+* [IKEA Effect](https://en.wikipedia.org/wiki/IKEA_effect) + 'Yet Another Todo'
+* Ambiguous rewards
 * Tease tomorrow
+* Make software that forgives
 
 ## Concepts
 
 * Every day brings a new color, a new chance
 * Every day should be completable
-* Streaks are a *reflection* of the reward, not the 'reward' itself
+* Streaks are a *reflection* of the reward, not the reward itself
 * Anti-data: you cannot interact with the past
 
 ## Thoughts

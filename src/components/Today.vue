@@ -93,7 +93,8 @@ export default {
   }
 
   & > div {
-    position: absolute;
+    position: relative;
+    overflow-x: auto;
     width: 100%;
   }
 
@@ -147,14 +148,14 @@ export default {
   }
 
   .list {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 400;
     text-align: left;
     margin: 2rem 0 2.75rem 0;
 
     & .thing {
       position: relative;
-      padding: .5rem 2rem;
+      padding: .25rem 2rem;
       cursor: pointer;
       border-top: .1rem solid transparent;
       border-bottom: .1rem solid transparent;
@@ -170,7 +171,7 @@ export default {
         height: .125rem;
         width: calc(0%);
         left: 5rem; 
-        top: 1.65rem;
+        top: 1.25rem;
         background: var(--theme-text);
         transition: 1.2s all ease-in;
       }
