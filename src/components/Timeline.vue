@@ -20,8 +20,10 @@
         </button>
       </div>
     </div> -->
-    <today :thisDay="timeline[0]" :list="list"/>
-    <day v-for="day in notToday" :key="day.day" :thisDay="day" />
+
+    <!-- tomorrow? -->
+    <today :thisDay="timeline[0]" :timeline="timeline" :list="list" :rewards="rewards" />
+    <day :thisDay="day" v-for="day in notToday" :key="day.day" />
   </div>
 </template>
 
@@ -40,8 +42,10 @@ export default {
   data() {
     return {
       list: [
-        { name: 'Wake up', done: false },
-        { name: 'Eat', done: true },
+        { name: 'Wake up', done: true },
+        { name: 'Eat breakfast', done: true },
+        { name: 'Ping friend', done: true },
+        { name: 'Read', done: true },
         { name: 'Meditate', done: true },
       ],
       themes: [
@@ -119,6 +123,11 @@ export default {
         'fa-utensils-alt',
       ],
       timeline: [
+        {
+          day: '2018-01-02T08:00:00.000Z',
+          theme: 'seadrink',
+          reward: '',
+        },
         {
           day: '2018-01-01T08:00:00.000Z',
           theme: 'genepersimmons',

@@ -64,6 +64,11 @@ export default {
   border-right: .1rem solid var(--theme-dark);
   background: linear-gradient(-185deg, var(--theme-high), var(--theme-low));
 
+  > div {
+    overflow-y: auto;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
 
   & .icon {
     font-size: 7rem;

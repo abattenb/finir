@@ -1,11 +1,11 @@
 <template>
-  <div class="day today" :class="theme">
+  <div class="day today" :class="[theme, {dayDone: this.thisDay.reward}]">
     <div>
       <div>{{formatDate}}</div>
       <div class="list">
         <div 
           v-for="(thing, index) in currentList"
-          :key="thing.name"
+          :key="index"
           class="thing"
           :class="{complete: thing.done}"
           @click="toggleDone(index, thing)">
@@ -18,9 +18,12 @@
           </div>
         </div>
       </div>
-      <button class="fin" :class="[canFinish ? 'enabled' : 'disabled']">
+      <button class="fin" :class="[canFinish ? 'enabled' : 'disabled']" @click="giftReward">
         FIN
       </button>
+    </div>
+    <div v-if="this.thisDay.reward" class="icon">
+      <i class="fal" :class="thisDay.reward" />
     </div>
   </div>
 </template>
@@ -35,6 +38,8 @@ export default {
   extends: day,
   props: [
     'list',
+    'rewards',
+    'timeline',
   ],
   data() {
     return {
@@ -43,7 +48,6 @@ export default {
   },
   created() {
     this.currentList = JSON.parse(JSON.stringify(this.list));
-    // console.log(this.currentList);
   },
   computed: {
     canFinish() {
@@ -54,14 +58,93 @@ export default {
     toggleDone(index, thing) {
       this.currentList[index].done = !this.currentList[index].done;
     },
+    giftReward() {
+      // this.timeline.push({
+      //     day: '2018-01-03T08:00:00.000Z',
+      //     theme: 'spiltblues',
+      //     reward: '',
+      //   });
+      this.thisDay.reward = this.rewards[Math.floor(Math.random() * this.rewards.length)];
+    },
   },
 };
 </script>
 <style lang="scss" scoped>
 
 .today {
-  // box-shadow: -.25rem 0 1.5rem 0 #444;
   z-index: 1;
+  position: relative;
+  text-shadow: 0 .075rem 0rem var(--theme-dark);
+  transition: .2s all ease-out;
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 0;
+    user-select: none;
+    touch-action: none;
+    pointer-events: none;
+    box-shadow: -.25rem 0 1.5rem 0 #444;
+  }
+
+  & > div {
+    position: absolute;
+    width: 100%;
+  }
+
+  // Triggers when day is complete
+  &.dayDone {
+    & > div {
+      animation: 1.5s listFade .25s forwards cubic-bezier(0,.5,.35,.75);
+
+      @keyframes listFade {
+        0% {
+          opacity: 1;
+          transform: translateY(0rem);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-2rem);
+        }
+        100% {
+          user-select: none;
+          touch-action: none;
+          pointer-events: none;
+          z-index: -1;
+        }
+      }
+    }
+
+    // Shadow disappears
+    &:after {
+      box-shadow: none;
+      transition: 2s all ease-out;
+    }
+
+    // Icon fades in after delay
+    .icon {
+      position: absolute;
+      width: 100%;
+      opacity: 0;
+      animation: 2.5s iconFade 2s forwards cubic-bezier(0,.5,.35,.75);
+    }
+
+    @keyframes iconFade {
+      from {
+        opacity: 0;
+        transform: translateY(3rem) scale(1);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0rem) scale(1.05);
+      }
+    }
+  }
 
   .list {
     font-size: 2rem;
@@ -75,12 +158,10 @@ export default {
       cursor: pointer;
       border-top: .1rem solid transparent;
       border-bottom: .1rem solid transparent;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, .05);
+      text-shadow: 0 .075rem 0rem var(--theme-dark);
       transition: .2s all ease-out;
 
-      &:hover,
-      &:focus,
-      &:active {
-      }
 
       &:before {
         content: '';
@@ -95,6 +176,7 @@ export default {
       }
 
       &.complete {
+        text-shadow: 0 -.075rem 0rem var(--theme-dark);
 
         &:before {
           content: '';
@@ -137,6 +219,9 @@ export default {
     margin: 0 2rem;
     border: .1rem solid var(--theme-low);
     border-radius: .2rem;
+    user-select: none;
+    pointer-events: none;
+
 
     &:hover,
     &:focus,
@@ -150,6 +235,7 @@ export default {
       border: .1rem solid var(--theme-text);
       transform: translateY(-.05rem);
       box-shadow: 0 .25rem .5rem var(--theme-dark), 0 -.25rem .5rem var(--theme-high);
+      pointer-events: auto;
       transition: .1s all ease-in;
     }
 
@@ -169,6 +255,10 @@ export default {
       transition: .8s all ease-out;
     }
   }
+}
+
+.day .icon {
+  font-size: 7rem;
 }
 
 </style>

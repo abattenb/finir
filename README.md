@@ -7,9 +7,10 @@ fenir mean 'to finish'. This is a personal completion app, customized to my dail
 ## Goals
 
 * Color as a motivator
-* [IKEA Effect](https://en.wikipedia.org/wiki/IKEA_effect) + 'Yet Another Todo'
+* [IKEA Effect](https://en.wikipedia.org/wiki/IKEA_effect) as 'Yet Another Todo'
 * Forgiveness-as-a-Service
-* Novelity as reward
+* Small steps + small rewards = Big change
+* Tease tomorrow
 
 ## Concepts
 
@@ -56,3 +57,7 @@ Github pages instead of a standard static host:
 * `assetsPublicPath: '/'` -> `assetsPublicPath: './'`
 * `index: path.resolve(__dirname, '../dist/index.html'),` -> `    index: path.resolve(__dirname, '../docs/index.html')`
 * `    assetsRoot: path.resolve(__dirname, '../dist'),` -> `    assetsRoot: path.resolve(__dirname, '../docs'),`
+
+Also note that font loader has been increased to bundle FontAwesome as Github Pages
+was having trouble referencing additional resources in built CSS files
+(due to the above change).
