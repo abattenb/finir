@@ -1,28 +1,8 @@
 <template>
   <div class="timeline">
-    <!-- <div class="day today">
-      <div>
-        <div>
-          {{ formatDate(timeline[0].day) }}
-        </div>
-        <div class="list">
-          <div 
-            v-for="day in list"
-            :key="day.name"
-            class="day">
-            <i class="far fa-square"></i>
-            &nbsp;
-            {{ day.name }}
-          </div>
-        </div>
-        <button class="fin">
-          FIN
-        </button>
-      </div>
-    </div> -->
 
-    <!-- tomorrow? -->
-    <today :thisDay="timeline[0]" :timeline="timeline" :list="list" :rewards="rewards" />
+    <tomorrow :thisDay="timeline[0]" v-if="timeline[1].reward"/>
+    <today :thisDay="timeline[1]" :timeline="timeline" :list="list" :rewards="rewards" />
     <day :thisDay="day" v-for="day in notToday" :key="day.day" />
   </div>
 </template>
@@ -31,11 +11,10 @@
 /* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 
-// TODO: Randomly assign rewards
-import Color from 'color';
 import dateFns from 'date-fns';
 import day from './Day';
 import today from './Today';
+import tomorrow from './Tomorrow';
 
 export default {
   name: 'timeline',
@@ -124,8 +103,18 @@ export default {
       ],
       timeline: [
         {
-          day: '2018-01-02T08:00:00.000Z',
+          day: '2018-01-04T08:00:00.000Z',
+          theme: 'megaviolet',
+          reward: '',
+        },
+        {
+          day: '2018-01-03T08:00:00.000Z',
           theme: 'seadrink',
+          reward: '',
+        },
+        {
+          day: '2018-01-02T08:00:00.000Z',
+          theme: '',
           reward: '',
         },
         {
@@ -148,31 +137,6 @@ export default {
           theme: '',
           reward: '',
         },
-        {
-          day: '2017-12-28T08:00:00.000Z',
-          theme: 'starburst',
-          reward: 'fa-coffee',
-        },
-        {
-          day: '2017-12-27T08:00:00.000Z',
-          theme: 'limelife',
-          reward: 'fa-bomb',
-        },
-        {
-          day: '2017-12-26T08:00:00.000Z',
-          theme: 'seadrink',
-          reward: 'fa-book',
-        },
-        {
-          day: '2017-12-25T08:00:00.000Z',
-          theme: 'barbiegirl',
-          reward: 'fa-utensils-alt',
-        },
-        {
-          day: '2017-12-24T08:00:00.000Z',
-          theme: 'spiltblues',
-          reward: 'fa-trophy',
-        },
       ],
     };
   },
@@ -185,12 +149,13 @@ export default {
   },
   computed: {
     notToday() {
-      return this.timeline.slice(1, this.timeline.length);
+      return this.timeline.slice(2, this.timeline.length);
     },
   },
   components: {
     day,
     today,
+    tomorrow,
   },
 };
 </script>

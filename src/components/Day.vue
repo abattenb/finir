@@ -9,7 +9,6 @@
 </template>
 <script>
 /* eslint-disable */
-import Color from 'color';
 import dateFns from 'date-fns';
 
 export default {
@@ -52,7 +51,7 @@ export default {
   box-sizing: border-box;
 
   --theme-text: #DDD;
-  --theme-primary: #FAFAFA;
+  --theme-primary: #DDD;
   --theme-high: #FAFAFA;
   --theme-low: #FAFAFA;
   --theme-dark: #FAFAFA;
@@ -60,8 +59,8 @@ export default {
   color: var(--theme-text);
   box-shadow: inset 0 0 10rem var(--theme-dark);
   text-shadow: 0 -.075rem 0rem var(--theme-dark);
-  border-left: .1rem solid var(--theme-high);
-  border-right: .1rem solid var(--theme-dark);
+  border-left: .1rem solid var(--theme-hard);
+  border-right: .1rem solid var(--theme-primary);
   background: linear-gradient(-185deg, var(--theme-high), var(--theme-low));
 
   > div {

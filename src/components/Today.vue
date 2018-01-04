@@ -32,7 +32,6 @@
 </template>
 <script>
 /* eslint-disable */
-import Color from 'color';
 import dateFns from 'date-fns';
 import day from './Day';
 
