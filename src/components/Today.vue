@@ -18,7 +18,10 @@
           </div>
         </div>
       </div>
-      <button class="fin" :class="[canFinish ? 'enabled' : 'disabled']" @click="giftReward">
+      <button 
+        class="fin" 
+        :class="[canFinish ? 'enabled' : 'disabled']" 
+        @click="giftReward">
         FIN
       </button>
     </div>
@@ -98,55 +101,6 @@ export default {
     width: 100%;
   }
 
-  // Triggers when day is complete
-  &.dayDone {
-    & > div {
-      animation: 1.5s listFade .25s forwards cubic-bezier(0,.5,.35,.75);
-
-      @keyframes listFade {
-        0% {
-          opacity: 1;
-          transform: translateY(0rem);
-        }
-        100% {
-          opacity: 0;
-          transform: translateY(-2rem);
-        }
-        100% {
-          user-select: none;
-          touch-action: none;
-          pointer-events: none;
-          z-index: -1;
-        }
-      }
-    }
-
-    // Shadow disappears
-    &:after {
-      box-shadow: none;
-      transition: 2s all ease-out;
-    }
-
-    // Icon fades in after delay
-    .icon {
-      position: absolute;
-      width: 100%;
-      opacity: 0;
-      animation: 2.5s iconFade 2s forwards cubic-bezier(0,.5,.35,.75);
-    }
-
-    @keyframes iconFade {
-      from {
-        opacity: 0;
-        transform: translateY(3rem) scale(1);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0rem) scale(1.05);
-      }
-    }
-  }
-
   .list {
     font-size: 1.75rem;
     font-weight: 400;
@@ -163,7 +117,7 @@ export default {
       text-shadow: 0 .075rem 0rem var(--theme-dark);
       transition: .2s all ease-out;
 
-
+      // Strinkthrough
       &:before {
         content: '';
         display: block;
@@ -176,6 +130,7 @@ export default {
         transition: 1.2s all ease-in;
       }
 
+      // Indent effect
       &.complete {
         text-shadow: 0 -.075rem 0rem var(--theme-dark);
 
@@ -257,6 +212,59 @@ export default {
     }
   }
 }
+
+// Triggers when day is complete
+.today.dayDone {
+  & > div {
+    animation: 1.5s listFade .25s forwards cubic-bezier(0,.5,.35,.75);
+
+    @keyframes listFade {
+      0% {
+        opacity: 1;
+        transform: translateY(0rem);
+      }
+      99% {
+        opacity: 0;
+        transform: translateY(-2rem);
+      }
+      100% {
+        opacity: 0;
+        z-index: -1;
+      }
+    }
+  }
+
+  // Shadow disappears
+  &:after {
+    box-shadow: none;
+    transition: 2s all ease-out;
+  }
+
+  // Icon fades in after delay
+  .icon {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    animation: 2.5s iconFade 2s forwards cubic-bezier(0,.5,.35,.75);
+  }
+
+  @keyframes iconFade {
+    from {
+      opacity: 0;
+      transform: translateY(3rem) scale(1);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0rem) scale(1.05);
+    }
+  }
+  
+  .fin {
+    user-select: none;
+    pointer-events: none;
+  }
+}
+
 
 .day .icon {
   font-size: 7rem;
