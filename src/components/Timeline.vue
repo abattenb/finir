@@ -3,7 +3,7 @@
 
     <tomorrow :thisDay="timeline[0]" v-if="timeline[1].reward"/>
     <today :thisDay="timeline[1]" :timeline="timeline" :list="list" :rewards="rewards" />
-    <day :thisDay="day" v-for="day in notToday" :key="day.day" />
+    <day :thisDay="day" v-for="(day, index) in notToday" :key="index" />
   </div>
 </template>
 
@@ -103,49 +103,61 @@ export default {
       ],
       timeline: [
         {
-          day: '2018-01-04T08:00:00.000Z',
-          theme: 'megaviolet',
-          reward: '',
-        },
-        {
-          day: '2018-01-03T08:00:00.000Z',
-          theme: 'seadrink',
-          reward: '',
-        },
-        {
-          day: '2018-01-02T08:00:00.000Z',
-          theme: '',
-          reward: '',
-        },
-        {
           day: '2018-01-01T08:00:00.000Z',
           theme: 'genepersimmons',
-          reward: '',
+          reward: 'fa-bomb',
         },
-        {
-          day: '2017-12-31T08:00:00.000Z',
-          theme: 'megaviolet',
-          reward: 'fa-leaf',
-        },
-        {
-          day: '2017-12-30T08:00:00.000Z',
-          theme: 'genepersimmons',
-          reward: 'fa-gem',
-        },
-        {
-          day: '2017-12-29T08:00:00.000Z',
-          theme: '',
-          reward: '',
-        },
+        // {
+        //   day: '2017-12-31T08:00:00.000Z',
+        //   theme: 'megaviolet',
+        //   reward: 'fa-leaf',
+        // },
+        // {
+        //   day: '2017-12-30T08:00:00.000Z',
+        //   theme: 'genepersimmons',
+        //   reward: 'fa-gem',
+        // },
+        // {
+        //   day: '2017-12-29T08:00:00.000Z',
+        //   theme: '',
+        //   reward: '',
+        // },
       ],
     };
   },
   methods: {
-    formatDate(thisDay) {
-      return dateFns.format(thisDay, 'MMMM Do');
+    randomTheme() {
+      return this.themes[Math.floor(Math.random() * this.themes.length)];
     },
   },
   created() {
+    const todayDate = dateFns.startOfDay(dateFns.format(new Date()));
+    console.log(todayDate);
+    // Checks if there is a timeline
+    if (this.timeline.length === 0) {
+      this.timeline.unshift({
+        day: todayDate,
+        theme: '',
+        reward: '',
+      });
+    }
+
+    // Generates new days up to tomorrow
+    const lastDay = JSON.parse(JSON.stringify(this.timeline[0]));
+    while (!dateFns.isTomorrow(lastDay.day)) {
+      lastDay.day = dateFns.addDays(lastDay.day, 1);
+      this.timeline.unshift({
+        day: lastDay.day,
+        theme: '',
+        reward: '',
+      });
+    }
+    // // Checks to see if today has a theme
+    if (this.timeline[1].theme === '') this.timeline[1].theme = this.randomTheme();
+    // // Checks to see if tomorrow has a theme
+    if (this.timeline[0].theme === '') this.timeline[0].theme = this.randomTheme();
+
+    // TODO: Prune to 100 entries
   },
   computed: {
     notToday() {

@@ -55,8 +55,8 @@ For detailed explanation on how things work, checkout the [guide](http://vuejs-t
 Github pages instead of a standard static host:
 
 * `assetsPublicPath: '/'` -> `assetsPublicPath: './'`
-* `index: path.resolve(__dirname, '../dist/index.html'),` -> `    index: path.resolve(__dirname, '../docs/index.html')`
-* `    assetsRoot: path.resolve(__dirname, '../dist'),` -> `    assetsRoot: path.resolve(__dirname, '../docs'),`
+* `index: path.resolve(__dirname, '../dist/index.html'),` -> `index: path.resolve(__dirname, '../docs/index.html')`
+* `assetsRoot: path.resolve(__dirname, '../dist'),` -> `assetsRoot: path.resolve(__dirname, '../docs'),`
 
 Also note that font loader has been increased to bundle FontAwesome as Github Pages
 was having trouble referencing additional resources in built CSS files

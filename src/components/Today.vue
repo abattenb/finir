@@ -49,23 +49,23 @@ export default {
     }
   },
   created() {
+    // Create copy of list for today
     this.currentList = JSON.parse(JSON.stringify(this.list));
   },
   computed: {
+    // Checks to see if the list is complete
     canFinish() {
       return this.currentList.every(x => x.done === true);
     },
   },
   methods: {
+    // Checks and unchecks a list item
     toggleDone(index, thing) {
       this.currentList[index].done = !this.currentList[index].done;
     },
+    // Today is finished! Congrats!
     giftReward() {
-      // this.timeline.push({
-      //     day: '2018-01-03T08:00:00.000Z',
-      //     theme: 'spiltblues',
-      //     reward: '',
-      //   });
+      // Generates a random reward for today
       this.thisDay.reward = this.rewards[Math.floor(Math.random() * this.rewards.length)];
     },
   },
