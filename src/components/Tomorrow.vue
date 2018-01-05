@@ -2,7 +2,12 @@
   <div class="day tomorrow"  :class="theme">
     <!-- TODO: Add 'tomorrow' title -->
     <!-- Tomorrow -->
-    <div>Tomorrow is..</div>
+    <div>
+      Tomorrow<br>
+      brings&hellip;
+      <br>
+      <br>
+    </div>
 
   </div>
 </template>
@@ -37,6 +42,13 @@ export default {
 </script>
 <style lang="scss">
 
+.tomorrow > div{
+  font-family: 'Mr Dafoe', cursive;
+  transform: rotate(-8deg) skew(-5deg);
+  font-size: 4rem;
+  line-height: 1;
+  font-weight: 100;
+}
 
 </style>
 

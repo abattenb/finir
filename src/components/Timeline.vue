@@ -124,6 +124,22 @@ export default {
       ],
     };
   },
+  watch: {
+    list: {
+      handler() {
+        console.log('save');
+        // this.saveSettings();
+      },
+      deep: true,
+    },
+    timeline: {
+      handler() {
+        console.log('save');
+        // this.saveSettings();
+      },
+      deep: true,
+    },
+  },
   methods: {
     randomTheme() {
       // TODO: return color that hasnt been used in the last 2

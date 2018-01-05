@@ -1,5 +1,5 @@
 // finir
-@import url('https://fonts.googleapis.com/css?family=Fira+Sans:300,400,500,600,800');
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,600|Mr+Dafoe');
 
 @import './themes.scss';
 @import './fontawesome.css';
@@ -8,12 +8,10 @@
 html {
   background: #fafafa;
   font-family: 'Fira Sans', sans-serif;
-  touch-action: manipulation;
 }
 
 body {
   margin: 0;
-  // overflow: hidden;
 }
 
 a,
@@ -22,3 +20,9 @@ button,
   cursor: pointer;
 }
 
+
+.day .icon > * {
+  font-size: 7rem;
+  transform: translate3d(0, -1.25rem, 0);
+
+}

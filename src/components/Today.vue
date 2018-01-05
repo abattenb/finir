@@ -4,7 +4,7 @@
       <div>{{formatDate}}</div>
       <div class="list">
         <div 
-          v-for="(thing, index) in currentList"
+          v-for="(thing, index) in list"
           :key="index"
           class="thing"
           :class="{complete: thing.done}"
@@ -45,23 +45,20 @@ export default {
   ],
   data() {
     return {
-      currentList: '',
     }
   },
   created() {
-    // Create copy of list for today
-    this.currentList = JSON.parse(JSON.stringify(this.list));
   },
   computed: {
     // Checks to see if the list is complete
     canFinish() {
-      return this.currentList.every(x => x.done === true);
+      return this.list.every(x => x.done === true);
     },
   },
   methods: {
     // Checks and unchecks a list item
     toggleDone(index, thing) {
-      this.currentList[index].done = !this.currentList[index].done;
+      this.list[index].done = !this.list[index].done;
     },
     // Today is finished! Congrats!
     giftReward() {
@@ -77,6 +74,7 @@ export default {
   z-index: 1;
   position: relative;
   text-shadow: 0 .075rem 0rem var(--theme-dark);
+  overflow-x: hidden;
   overflow-y: auto;
   transition: .2s all ease-out;
 
@@ -98,6 +96,9 @@ export default {
   & > div {
     position: relative;
     width: 100%;
+    overflow-y: auto;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
   }
 
   .list {
@@ -169,7 +170,7 @@ export default {
     font-size: 2.5rem;
     background: none;
     color: white;
-    font-weight: 700;
+    font-weight: 600;
     padding: .5rem;
     margin: 0 2rem;
     border: .1rem solid var(--theme-low);
@@ -265,8 +266,5 @@ export default {
 }
 
 
-.day .icon {
-  font-size: 7rem;
-}
 
 </style>
