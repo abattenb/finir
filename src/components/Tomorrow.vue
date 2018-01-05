@@ -1,7 +1,8 @@
 <template>
   <div class="day tomorrow"  :class="theme">
+    <!-- TODO: Add 'tomorrow' title -->
     <!-- Tomorrow -->
-    <!-- <div>{{formatDate}}</div> -->
+    <div>Tomorrow is..</div>
 
   </div>
 </template>
@@ -36,21 +37,6 @@ export default {
 </script>
 <style lang="scss">
 
-.tomorrow {
-  flex-basis: 0;
-  margin-left: -.1rem;
-  animation: 3s reveal 8s forwards;
-}
 
-@keyframes reveal {
-  from {
-    flex-basis: 0;
-    margin-left: -.1rem;
-  }
-  to {
-    flex-basis: 85vw;
-    margin-left: 0;
-  }
-}
 </style>
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="day today" :class="[theme, {dayDone: this.thisDay.reward}]">
+  <div class="day today" :class="[theme]">
     <div>
       <div>{{formatDate}}</div>
       <div class="list">
@@ -77,6 +77,7 @@ export default {
   z-index: 1;
   position: relative;
   text-shadow: 0 .075rem 0rem var(--theme-dark);
+  overflow-y: auto;
   transition: .2s all ease-out;
 
   &:after {
@@ -96,7 +97,6 @@ export default {
 
   & > div {
     position: relative;
-    overflow-x: auto;
     width: 100%;
   }
 
@@ -213,7 +213,7 @@ export default {
 }
 
 // Triggers when day is complete
-.today.dayDone {
+.dayDone .today {
   & > div {
     animation: 1.5s listFade .25s forwards cubic-bezier(0,.5,.35,.75);
 

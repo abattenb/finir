@@ -50,6 +50,9 @@ export default {
   color: white;
   box-sizing: border-box;
 
+  transform: translate3d(85vw, 0, 0);
+
+
   --theme-text: #DDD;
   --theme-primary: #DDD;
   --theme-high: #FAFAFA;
@@ -73,6 +76,22 @@ export default {
     font-size: 7rem;
   }
 }
+
+
+.dayDone .day {
+  animation: 3s 8s reveal forwards;
+}
+
+@keyframes reveal {
+  from {
+    transform: translate3d(85vw, 0, 0);
+  }
+  to {
+    transform: translate3d(0vw, 0, 0);
+  }
+}
+
+
 
 </style>
 

@@ -1,7 +1,6 @@
 <template>
-  <div class="timeline">
-
-    <tomorrow :thisDay="timeline[0]" v-if="timeline[1].reward"/>
+  <div class="timeline" :class="{dayDone: this.timeline[1].reward}">
+    <tomorrow :thisDay="timeline[0]" />
     <today :thisDay="timeline[1]" :timeline="timeline" :list="list" :rewards="rewards" />
     <day :thisDay="day" v-for="(day, index) in notToday" :key="index" />
   </div>
@@ -127,6 +126,7 @@ export default {
   },
   methods: {
     randomTheme() {
+      // TODO: return color that hasnt been used in the last 2
       return this.themes[Math.floor(Math.random() * this.themes.length)];
     },
   },
@@ -172,12 +172,12 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .timeline {
   display: flex;
   flex-direction: row-reverse;
   height: 100vh;
-  overflow-x: scroll;
+  overflow-x: auto;
   overflow-y: hidden;
 }
 
