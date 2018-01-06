@@ -6,6 +6,10 @@ import '@/assets/styles/styles.scss';
 import App from './App';
 import router from './router';
 
+import logo from './common/utils';
+
+// Show logo
+logo();
 
 Vue.config.productionTip = false;
 
@@ -16,3 +20,4 @@ new Vue({
   template: '<App/>',
   components: { App },
 });
+
