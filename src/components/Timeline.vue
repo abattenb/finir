@@ -7,13 +7,19 @@
 </template>
 
 <script>
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
+/* eslint-disable */
 
 import dateFns from 'date-fns';
+
+import rewards from '@/common/rewards';
+import themes from '@/common/themes';
+
 import day from './Day';
 import today from './Today';
 import tomorrow from './Tomorrow';
+
+
+/* eslint-disable no-console */
 
 export default {
   name: 'timeline',
@@ -26,115 +32,45 @@ export default {
         { name: 'Read', done: true },
         { name: 'Meditate', done: true },
       ],
-      themes: [
-        'starburst',
-        'genepersimmons',
-        'gloriousincandescence',
-        'limelife',
-        'seadrink',
-        'barbiegirl',
-        'spiltblues',
-        'megaviolet',
-      ],
-      rewards: [
-        'fa-anchor',
-        'fa-clock',
-        'fa-balance-scale',
-        'fa-battery-bolt',
-        'fa-beer',
-        'fa-bell',
-        'fa-bicycle',
-        'fa-birthday-cake',
-        'fa-bomb',
-        'fa-book',
-        'fa-bug',
-        'fa-camera-retro',
-        'fa-club',
-        'fa-coffee',
-        'fa-compass',
-        'fa-envelope',
-        'fa-fighter-jet',
-        'fa-flag',
-        'fa-futbol',
-        'fa-gamepad',
-        'fa-gem',
-        'fa-gift',
-        'fa-globe',
-        'fa-headphones',
-        'fa-heart',
-        'fa-jack-o-lantern',
-        'fa-leaf',
-        'fa-lemon',
-        'fa-lightbulb',
-        'fa-magic',
-        'fa-magnet',
-        'fa-map-pin',
-        'fa-medkit',
-        'fa-microchip',
-        'fa-microphone-alt',
-        'fa-moon',
-        'fa-paint-brush',
-        'fa-paper-plane',
-        'fa-paperclip',
-        'fa-paw',
-        'fa-pen-alt',
-        'fa-pencil-alt',
-        'fa-puzzle-piece',
-        'fa-qrcode',
-        'fa-rocket',
-        'fa-save',
-        'fa-shield-alt',
-        'fa-snowflake',
-        'fa-space-shuttle',
-        'fa-spade',
-        'fa-star',
-        'fa-sun',
-        'fa-tag',
-        'fa-thumbtack',
-        'fa-ticket-alt',
-        'fa-tree-alt',
-        'fa-trophy',
-        'fa-tv-retro',
-        'fa-umbrella',
-        'fa-usd-circle',
-        'fa-user-secret',
-        'fa-utensils-alt',
-      ],
+      rewards,
+      themes,
       timeline: [
         {
           day: '2018-01-01T08:00:00.000Z',
           theme: 'genepersimmons',
           reward: 'fa-bomb',
         },
-        // {
-        //   day: '2017-12-31T08:00:00.000Z',
-        //   theme: 'megaviolet',
-        //   reward: 'fa-leaf',
-        // },
-        // {
-        //   day: '2017-12-30T08:00:00.000Z',
-        //   theme: 'genepersimmons',
-        //   reward: 'fa-gem',
-        // },
-        // {
-        //   day: '2017-12-29T08:00:00.000Z',
-        //   theme: '',
-        //   reward: '',
-        // },
+        {
+          day: '2017-12-31T08:00:00.000Z',
+          theme: 'megaviolet',
+          reward: 'fa-leaf',
+        },
+        {
+          day: '2017-12-30T08:00:00.000Z',
+          theme: 'genepersimmons',
+          reward: 'fa-gem',
+        },
+        {
+          day: '2017-12-29T08:00:00.000Z',
+          theme: '',
+          reward: '',
+        },
       ],
     };
   },
   watch: {
     list: {
       handler() {
-        console.log('save');
+        // TODO: Save
+        // console.log('save');
         // this.saveSettings();
       },
       deep: true,
     },
     timeline: {
       handler() {
-        console.log('save');
+        // TODO: Save
+        // console.log('save');
         // this.saveSettings();
       },
       deep: true,
@@ -142,13 +78,25 @@ export default {
   },
   methods: {
     randomTheme() {
-      // TODO: return color that hasnt been used in the last 2
-      return this.themes[Math.floor(Math.random() * this.themes.length)];
+      // returnS color that hasnt been used in the last 2
+      const blacklist = [];
+      let i = 0;
+      while (i < this.timeline.length && blacklist.length < 2) {
+        // If the theme in the timeline isnt black, add to blacklist
+        if (this.timeline[i].theme) blacklist.push(this.timeline[i].theme);
+        i += 1;
+      }
+      // Make copy of themes
+      let filteredThemes = JSON.parse(JSON.stringify(this.themes));
+      // Filter out blacklist from pool of available themes
+      filteredThemes = filteredThemes.filter(f => !blacklist.includes(f));
+      // Return random theme from filtered theme list
+      return filteredThemes[Math.floor(Math.random() * filteredThemes.length)];
     },
   },
   created() {
     const todayDate = dateFns.startOfDay(dateFns.format(new Date()));
-    console.log(todayDate);
+
     // Checks if there is a timeline
     if (this.timeline.length === 0) {
       this.timeline.unshift({

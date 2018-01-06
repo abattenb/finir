@@ -1,46 +1,75 @@
 <template>
   <div>
-    <h1>Test</h1>
-
-    <div class="panels">
-      <div class="panel">1</div>
-      <div class="panel">2</div>
-      <div class="panel">3</div>
-      <div class="panel">4</div>
+    <div class="timeline">
+      <today
+        :thisDay="day"
+        v-for="(day, index) in timeline" 
+        :key="index" 
+        :list="list" 
+        :rewards="rewards" />
     </div>
+
 
   </div>
 </template>
 
 <script>
+
+// import dateFns from 'date-fns';
+
+import rewards from '@/common/rewards';
+import themes from '@/common/themes';
+
+import today from './Today';
+
 export default {
   name: 'test',
   data() {
     return {
+      rewards,
+      list: [
+        { name: 'Wake up', done: true },
+        { name: 'Eat breakfast', done: true },
+        { name: 'Ping friend', done: true },
+        { name: 'Read', done: true },
+        { name: 'Meditate', done: true },
+      ],
+      timeline: [],
     };
+  },
+  created() {
+    Object.entries(themes).forEach((theme) => {
+      this.timeline.unshift({
+        // day: todayDate,
+        theme,
+        reward: this.giftReward(),
+      });
+    });
+    // Need to add an extra day due to how tomorrow shifting works normally
+    this.timeline.unshift({
+      theme: '',
+      reward: this.giftReward(),
+    });
+  },
+  methods: {
+    giftReward() {
+      // Generates a random reward for today
+      return rewards[Math.floor(Math.random() * rewards.length)];
+    },
+  },
+  components: {
+    today,
   },
 };
 </script>
 
 <style lang="scss" scoped>
-
-.panels {
+.timeline {
   display: flex;
   flex-direction: row-reverse;
+  height: 100vh;
   overflow-x: auto;
   overflow-y: hidden;
-  width: 100%;
-  font-size: 10rem;
-  color: white;
-
-  .panel {
-    flex: 0 0 85vw;
-    height: 20rem;
-    outline: 1px solid black;
-    background: red;
-    transform: translate3d(85vw, 0, 0);
-  }
 }
-
 </style>
 
