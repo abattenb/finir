@@ -1,14 +1,11 @@
 <template>
   <div class="day tomorrow"  :class="theme">
-    <!-- TODO: Add 'tomorrow' title -->
-    <!-- Tomorrow -->
     <div>
       Tomorrow<br>
       brings&hellip;
       <br>
       <br>
     </div>
-
   </div>
 </template>
 <script>

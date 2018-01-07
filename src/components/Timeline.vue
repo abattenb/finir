@@ -61,22 +61,21 @@ export default {
   watch: {
     list: {
       handler() {
-        // TODO: Save
-        // console.log('save');
-        // this.saveSettings();
+        this.saveTimeline();
       },
       deep: true,
     },
     timeline: {
       handler() {
-        // TODO: Save
-        // console.log('save');
-        // this.saveSettings();
+        this.saveTimeline();
       },
       deep: true,
     },
   },
   methods: {
+    saveTimeline() {
+      localStorage.setItem('savedTimeline', JSON.stringify(this.timeline));
+    },
     randomTheme() {
       // returnS color that hasnt been used in the last 2
       const blacklist = [];
@@ -100,6 +99,10 @@ export default {
     // Maximum days 'saved'
     const maxDays = 100;
 
+    // Load timeline
+    const savedTimeline = JSON.parse(localStorage.getItem('savedTimeline'));
+    if (savedTimeline) this.timeline = savedTimeline;
+
     // If no timeline, create today
     if (this.timeline.length === 0) {
       this.timeline.unshift({
@@ -110,7 +113,7 @@ export default {
     }
 
     // Generates new, unfinished days up thru tomorrow
-    // starting from the last previously logged day
+    // starting from the last previously logged day in timeline
     const lastDay = JSON.parse(JSON.stringify(this.timeline[0]));
     while (!dateFns.isTomorrow(lastDay.day)) {
       lastDay.day = dateFns.addDays(lastDay.day, 1);
