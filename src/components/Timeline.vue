@@ -35,26 +35,6 @@ export default {
       rewards,
       themes,
       timeline: [
-        {
-          day: '2018-01-01T08:00:00.000Z',
-          theme: 'genepersimmons',
-          reward: 'fa-bomb',
-        },
-        {
-          day: '2017-12-31T08:00:00.000Z',
-          theme: 'megaviolet',
-          reward: 'fa-leaf',
-        },
-        {
-          day: '2017-12-30T08:00:00.000Z',
-          theme: 'seadrink',
-          reward: 'fa-gem',
-        },
-        {
-          day: '2017-12-29T08:00:00.000Z',
-          theme: '',
-          reward: '',
-        },
       ],
     };
   },
