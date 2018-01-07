@@ -1,7 +1,7 @@
 <template>
   <div class="timeline" :class="{dayDone: this.timeline[1].reward}">
     <tomorrow :thisDay="timeline[0]" />
-    <today :thisDay="timeline[1]" :timeline="timeline" :list="list" :rewards="rewards" />
+    <today :thisDay="timeline[1]" :timeline="timeline" :tasks="tasks" :rewards="rewards" />
     <day :thisDay="day" v-for="(day, index) in notToday" :key="index" />
   </div>
 </template>
@@ -25,12 +25,12 @@ export default {
   name: 'timeline',
   data() {
     return {
-      list: [
-        { name: 'Wake up', done: true },
-        { name: 'Eat breakfast', done: true },
-        { name: 'Ping friend', done: true },
-        { name: 'Read', done: true },
-        { name: 'Meditate', done: true },
+      tasks: [
+        // { name: 'Wake up', done: true },
+        // { name: 'Eat breakfast', done: true },
+        // { name: 'Ping friend', done: true },
+        // { name: 'Read', done: true },
+        // { name: 'Meditate', done: true },
       ],
       rewards,
       themes,
@@ -39,7 +39,7 @@ export default {
     };
   },
   watch: {
-    list: {
+    tasks: {
       handler() {
         this.saveTimeline();
       },
@@ -111,6 +111,10 @@ export default {
 
     // Prune to maxDays
     if (this.timeline.length > maxDays) this.timeline = this.timeline.slice(0, maxDays);
+
+    // Load tasks
+    const loadedTasks = JSON.parse(localStorage.getItem('tasks'));
+    if (loadedTasks) this.tasks = loadedTasks;
   },
   computed: {
     notToday() {

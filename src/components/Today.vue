@@ -1,14 +1,14 @@
 <template>
   <div class="day today" :class="[theme]">
     <div>
-      <div>{{formatDate}}</div>
-      <div class="list">
+      <div @click="oneClick($event)">{{formatDate}}</div>
+      <div class="tasks">
         <div 
-          v-for="(thing, index) in list"
+          v-for="(thing, index) in tasks"
           :key="index"
           class="thing"
           :class="{complete: thing.done}"
-          @click="toggleDone(index, thing)">
+          @click="toggleDone(index)">
           <div class="check">
             <i class="far fa-square" :class="[!thing.done ? 'show' : 'hide']"/>
             <i class="fas fa-check-square" :class="[thing.done ? 'show' : 'hide']"/>
@@ -31,39 +31,54 @@
   </div>
 </template>
 <script>
-/* eslint-disable */
-import dateFns from 'date-fns';
 import day from './Day';
 
 export default {
   name: 'today',
   extends: day,
   props: [
-    'list',
+    'tasks',
     'rewards',
     'timeline',
   ],
   data() {
     return {
-    }
+      delay: 700,
+      clicks: 0,
+      timer: null,
+    };
   },
   created() {
   },
   computed: {
-    // Checks to see if the list is complete
+    // Checks to see if the tasks is complete
     canFinish() {
-      return this.list.every(x => x.done === true);
+      return this.tasks.every(x => x.done === true);
     },
   },
   methods: {
-    // Checks and unchecks a list item
-    toggleDone(index, thing) {
-      this.list[index].done = !this.list[index].done;
+    // Checks and unchecks a tasks item
+    toggleDone(index) {
+      this.tasks[index].done = !this.tasks[index].done;
     },
     // Today is finished! Congrats!
     giftReward() {
       // Generates a random reward for today
       this.thisDay.reward = this.rewards[Math.floor(Math.random() * this.rewards.length)];
+    },
+    // Double click method to route to settings
+    // https://jsfiddle.net/kjtkzgvp/1/
+    oneClick() {
+      this.clicks += 1;
+      if (this.clicks === 1) {
+        this.timer = setTimeout(() => {
+          this.clicks = 0;
+        }, this.delay);
+      } else {
+        clearTimeout(this.timer);
+        this.clicks = 0;
+        this.$router.push('/settings');
+      }
     },
   },
 };
@@ -101,7 +116,7 @@ export default {
     padding-bottom: 3rem;
   }
 
-  .list {
+  .tasks {
     font-size: 1.75rem;
     font-weight: 400;
     text-align: left;
@@ -216,9 +231,9 @@ export default {
 // Triggers when day is complete
 .dayDone .today {
   & > div {
-    animation: 1.5s listFade .25s forwards cubic-bezier(0,.5,.35,.75);
+    animation: 1.5s tasksFade .25s forwards cubic-bezier(0,.5,.35,.75);
 
-    @keyframes listFade {
+    @keyframes tasksFade {
       0% {
         opacity: 1;
         transform: translateY(0rem);
