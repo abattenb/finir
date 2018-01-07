@@ -47,7 +47,7 @@ export default {
         },
         {
           day: '2017-12-30T08:00:00.000Z',
-          theme: 'genepersimmons',
+          theme: 'seadrink',
           reward: 'fa-gem',
         },
         {
@@ -95,9 +95,12 @@ export default {
     },
   },
   created() {
+    // Saves todays date
     const todayDate = dateFns.startOfDay(dateFns.format(new Date()));
+    // Maximum days 'saved'
+    const maxDays = 100;
 
-    // Checks if there is a timeline
+    // If no timeline, create today
     if (this.timeline.length === 0) {
       this.timeline.unshift({
         day: todayDate,
@@ -106,7 +109,8 @@ export default {
       });
     }
 
-    // Generates new days up to tomorrow
+    // Generates new, unfinished days up thru tomorrow
+    // starting from the last previously logged day
     const lastDay = JSON.parse(JSON.stringify(this.timeline[0]));
     while (!dateFns.isTomorrow(lastDay.day)) {
       lastDay.day = dateFns.addDays(lastDay.day, 1);
@@ -116,15 +120,18 @@ export default {
         reward: '',
       });
     }
-    // // Checks to see if today has a theme
+
+    // Checks to see if today has a theme
     if (this.timeline[1].theme === '') this.timeline[1].theme = this.randomTheme();
-    // // Checks to see if tomorrow has a theme
+    // Checks to see if tomorrow has a theme
     if (this.timeline[0].theme === '') this.timeline[0].theme = this.randomTheme();
 
-    // TODO: Prune to 100 entries
+    // Prune to maxDays
+    if (this.timeline.length > maxDays) this.timeline = this.timeline.slice(0, maxDays);
   },
   computed: {
     notToday() {
+      // Returns all days except today and tomorrow
       return this.timeline.slice(2, this.timeline.length);
     },
   },
