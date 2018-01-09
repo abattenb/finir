@@ -46,35 +46,6 @@ export default {
     },
   },
   methods: {
-    saveTimeline() {
-      localStorage.setItem('savedTimeline', JSON.stringify(this.timeline));
-    },
-    saveTasks() {
-      // Sets a last updated flag
-      localStorage.setItem('updated', dateFns.format(Date.now()));
-      localStorage.setItem('tasks', JSON.stringify(this.tasks));
-    },
-    randomTheme() {
-      // returnS color that hasnt been used in the last 2
-      const blacklist = [];
-      let i = 0;
-      while (i < this.timeline.length && blacklist.length < 2) {
-        // If the theme in the timeline isnt black, add to blacklist
-        if (this.timeline[i].theme) blacklist.push(this.timeline[i].theme);
-        i += 1;
-      }
-      // Make copy of themes
-      let filteredThemes = JSON.parse(JSON.stringify(this.themes));
-      // Filter out blacklist from pool of available themes
-      filteredThemes = filteredThemes.filter(f => !blacklist.includes(f));
-      // Return random theme from filtered theme list
-      return filteredThemes[Math.floor(Math.random() * filteredThemes.length)];
-    },
-  },
-  created() {
-    this.init();
-  },
-  methods: {
     init() {
       // Saves todays date
       const todayDate = dateFns.startOfDay(dateFns.format(new Date()));
@@ -127,6 +98,33 @@ export default {
         this.tasks.forEach(x => x.done = false);
       }
     },
+    saveTimeline() {
+      localStorage.setItem('savedTimeline', JSON.stringify(this.timeline));
+    },
+    saveTasks() {
+      // Sets a last updated flag
+      localStorage.setItem('updated', dateFns.format(Date.now()));
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
+    },
+    randomTheme() {
+      // returnS color that hasnt been used in the last 2
+      const blacklist = [];
+      let i = 0;
+      while (i < this.timeline.length && blacklist.length < 2) {
+        // If the theme in the timeline isnt black, add to blacklist
+        if (this.timeline[i].theme) blacklist.push(this.timeline[i].theme);
+        i += 1;
+      }
+      // Make copy of themes
+      let filteredThemes = JSON.parse(JSON.stringify(this.themes));
+      // Filter out blacklist from pool of available themes
+      filteredThemes = filteredThemes.filter(f => !blacklist.includes(f));
+      // Return random theme from filtered theme list
+      return filteredThemes[Math.floor(Math.random() * filteredThemes.length)];
+    },
+  },
+  created() {
+    this.init();
   },
   computed: {
     notToday() {
