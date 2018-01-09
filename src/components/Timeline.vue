@@ -25,23 +25,16 @@ export default {
   name: 'timeline',
   data() {
     return {
-      tasks: [
-        // { name: 'Wake up', done: true },
-        // { name: 'Eat breakfast', done: true },
-        // { name: 'Ping friend', done: true },
-        // { name: 'Read', done: true },
-        // { name: 'Meditate', done: true },
-      ],
+      timeline: [],
+      tasks: [],
       rewards,
       themes,
-      timeline: [
-      ],
     };
   },
   watch: {
     tasks: {
       handler() {
-        this.saveTimeline();
+        this.saveTasks();
       },
       deep: true,
     },
@@ -55,6 +48,11 @@ export default {
   methods: {
     saveTimeline() {
       localStorage.setItem('savedTimeline', JSON.stringify(this.timeline));
+    },
+    saveTasks() {
+      // Sets a last updated flag
+      localStorage.setItem('updated', dateFns.format(Date.now()));
+      localStorage.setItem('tasks', JSON.stringify(this.tasks));
     },
     randomTheme() {
       // returnS color that hasnt been used in the last 2
@@ -74,47 +72,61 @@ export default {
     },
   },
   created() {
-    // Saves todays date
-    const todayDate = dateFns.startOfDay(dateFns.format(new Date()));
-    // Maximum days 'saved'
-    const maxDays = 100;
+    this.init();
+  },
+  methods: {
+    init() {
+      // Saves todays date
+      const todayDate = dateFns.startOfDay(dateFns.format(new Date()));
+      // Maximum days 'saved'
+      const maxDays = 100;
 
-    // Load timeline
-    const savedTimeline = JSON.parse(localStorage.getItem('savedTimeline'));
-    if (savedTimeline) this.timeline = savedTimeline;
+      // Load timeline
+      const savedTimeline = JSON.parse(localStorage.getItem('savedTimeline'));
+      if (savedTimeline) this.timeline = savedTimeline;
 
-    // If no timeline, create today
-    if (this.timeline.length === 0) {
-      this.timeline.unshift({
-        day: todayDate,
-        theme: '',
-        reward: '',
-      });
-    }
+      // If no timeline, create today
+      if (this.timeline.length === 0) {
+        this.timeline.unshift({
+          day: todayDate,
+          theme: '',
+          reward: '',
+        });
+      }
 
-    // Generates new, unfinished days up thru tomorrow
-    // starting from the last previously logged day in timeline
-    const lastDay = JSON.parse(JSON.stringify(this.timeline[0]));
-    while (!dateFns.isTomorrow(lastDay.day)) {
-      lastDay.day = dateFns.addDays(lastDay.day, 1);
-      this.timeline.unshift({
-        day: lastDay.day,
-        theme: '',
-        reward: '',
-      });
-    }
+      // Generates new, unfinished days up thru tomorrow
+      // starting from the last previously logged day in timeline
+      const lastDay = JSON.parse(JSON.stringify(this.timeline[0]));
+      while (!dateFns.isTomorrow(lastDay.day)) {
+        lastDay.day = dateFns.addDays(lastDay.day, 1);
+        this.timeline.unshift({
+          day: lastDay.day,
+          theme: '',
+          reward: '',
+        });
+      }
 
-    // Checks to see if today has a theme
-    if (this.timeline[1].theme === '') this.timeline[1].theme = this.randomTheme();
-    // Checks to see if tomorrow has a theme
-    if (this.timeline[0].theme === '') this.timeline[0].theme = this.randomTheme();
+      // Checks to see if today has a theme
+      if (this.timeline[1].theme === '') this.timeline[1].theme = this.randomTheme();
+      // Checks to see if tomorrow has a theme
+      if (this.timeline[0].theme === '') this.timeline[0].theme = this.randomTheme();
 
-    // Prune to maxDays
-    if (this.timeline.length > maxDays) this.timeline = this.timeline.slice(0, maxDays);
+      // Prune to maxDays
+      if (this.timeline.length > maxDays) this.timeline = this.timeline.slice(0, maxDays);
 
-    // Load tasks
-    const loadedTasks = JSON.parse(localStorage.getItem('tasks'));
-    if (loadedTasks) this.tasks = loadedTasks;
+      // Save when tasks were last updated (before tasks get retrieved and watched)
+      const lastUpdated = localStorage.getItem('updated');
+
+      // Load tasks from localStorage
+      const loadedTasks = JSON.parse(localStorage.getItem('tasks'));
+      if (loadedTasks) this.tasks = loadedTasks;
+
+      // If the last time the tasks were updated is not today..
+      if (lastUpdated !== '' && !dateFns.isToday(lastUpdated)) {
+        // .. clear tasks completion
+        this.tasks.forEach(x => x.done = false);
+      }
+    },
   },
   computed: {
     notToday() {
