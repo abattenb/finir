@@ -2,7 +2,9 @@
 
 > A completion app.
 
-fenir mean 'to finish'. This is a personal completion app, customized to my daily needs.
+fenir mean 'to finish'. This is a personal completion app, designed to be relently positive and help accomplish the same goals every day.
+
+[finir.io](finir.io)
 
 ## Goals
 
